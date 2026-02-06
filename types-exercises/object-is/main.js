@@ -1,9 +1,9 @@
-if (!Object.is) {
+if (!Object.is || true) {
     Object.is = function ObjectIs(param1, param2) {
         if (param1 === 0 && param2 === 0) {
             param1 = 1 / param1;
             param2 = 1 / param2;
-        } else if (Number.isNaN(param1) && Number.isNaN(param2)) {
+        } else if (param1 !== param1 && param2 !== param2) {
             return true;
         }
 
