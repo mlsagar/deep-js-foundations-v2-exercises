@@ -28,11 +28,29 @@ function printRecords(recordIds) {
 
 function paidStudentsToEnroll() {
 	// TODO
+    const paidStudentsEnrollRecord = studentRecords.filter(function onlyPaidStudent(student){
+        return (student.paid && !currentEnrollment.includes(student.id));
+    })
+
+    const collectIds = paidStudentsEnrollRecord.map(function onlyId(record) {
+        return record.id;
+    }) 
+
+    return [...currentEnrollment, ...collectIds];
     
 }
 
 function remindUnpaid(recordIds) {
 	// TODO
+    const unpaidStudent = studentRecords.filter(function unPaidStudent(student) {
+        return (!student.paid && recordIds.includes(student.id));
+    })
+
+    const collectIds = unpaidStudent.map(function getStudentId(student) {
+        return student.id;
+    })
+
+    printRecords(collectIds);
 }
 
 var currentEnrollment = [ 410, 105, 664, 375 ];
@@ -51,10 +69,10 @@ var studentRecords = [
 
 printRecords(currentEnrollment);
 console.log("----");
-// currentEnrollment = paidStudentsToEnroll();
-// printRecords(currentEnrollment);
-// console.log("----");
-// remindUnpaid(currentEnrollment);
+currentEnrollment = paidStudentsToEnroll();
+printRecords(currentEnrollment);
+console.log("----");
+remindUnpaid(currentEnrollment);
 
 /*
 	Bob (664): Not Paid
